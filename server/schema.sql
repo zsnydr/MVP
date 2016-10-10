@@ -1,0 +1,33 @@
+CREATE DATABASE muse;
+
+USE muse;
+
+CREATE TABLE artists (
+  ID INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(200) NOT NULL,
+  PRIMARY KEY(ID)
+),
+
+CREATE TABLE albums (
+  ID INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  release VARCHAR(100) NOT NULL,
+  num_songs INT NOT NULL,
+  num_singles INT NOT NULL,
+  rating INT,
+  fk_artistID INT NOT NULL,
+  PRIMARY KEY(ID)
+  FOREIGN KEY(fk_artistID) REFERENCES artists(ID)
+);
+
+CREATE TABLE songs (
+  ID INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(200) NOT NULL,
+  track_num INT NOT NULL,
+  length TIME NOT NULL,
+  fk_artistID INT NOT NULL,
+  fk_albumID INT NOT NULL,
+  PRIMARY KEY(ID),
+  FOREIGN KEY(fk_artistID) REFERENCES artists(ID),
+  FOREIGN KEY(fk_albumID) REFERENCES albums(ID)
+);
